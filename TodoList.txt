@@ -1,0 +1,8 @@
+ version 4
+    -partie 1 (changement de departement) ETU 4210
+        a.-boutton[fiche employee] -> formulaire[nouvelle page] (ok)
+          -change departement (en cours)
+                -functions.php
+                    -update the department for the employee selected (en cours)
+          -verification => employee dans le nouveau departement(en cours)
+    -partie 2 (devenir manager) ETU 4287

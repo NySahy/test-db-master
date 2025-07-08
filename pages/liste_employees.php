@@ -110,6 +110,9 @@ session_start();
   <?php } ?>
   <a href="liste_department.php" class="btn btn-secondary">Retour</a>
   <?php 
+  foreach ($employees as $emp) {
+    $_SESSION['emp_no'] = $emp['emp_no'];
+  }
   $_SESSION['dept_no'] = $dept_no;
   ?>
 </div>

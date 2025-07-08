@@ -124,8 +124,8 @@ function getLongestJob($emp_no) {
     return mysqli_fetch_assoc($query);
 }
 
-function changeDepartment($select_dept,$current_dept){
-    $update = " UPDATE departments SET dept_name = '$select_dept' WHERE dept_name = '$current_dept'";
+function changeDepartment($select_dept,$current_dept_emp){
+    $update = " UPDATE dept_emp SET dept_no = '$select_dept' WHERE emp_no = '$current_dept_emp'";
     $query = mysqli_query(dbconnect(),$update);
     return $query;
 }

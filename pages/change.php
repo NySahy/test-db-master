@@ -3,6 +3,7 @@ session_start();
 require('../inc/functions.php');
 $list = getListDepartment(); 
 $current_dept = getDepartment($_SESSION['dept_no']);
+$emp_num = getEmployeesByNo($_SESSION['emp_no']);
 
 ?>
 <!DOCTYPE html>
@@ -28,8 +29,9 @@ $current_dept = getDepartment($_SESSION['dept_no']);
     </form>
 
     <?php if(isset($_POST['dept']) && $_POST['dept'] != $current_dept['dept_name']){ ?>
-        <?php echo($current_dept['dept_name']) ?>
-        <?php changeDepartment($_POST['dept'],$current_dept['dept_name']); ?>
+        <?php echo($_POST['dept']) ?>
+        <?php echo($emp_num['emp_no']) ?>
+        <?php changeDepartment($_POST['dept'],$emp_num['emp_no']); ?>
         
     <?php } ?>
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
   require ('../inc/functions.php');
 
   if (!isset($_GET['nom']) || !isset($_GET['dept'])) { 
@@ -108,6 +109,9 @@
     </button>
   <?php } ?>
   <a href="liste_department.php" class="btn btn-secondary">Retour</a>
+  <?php 
+  $_SESSION['dept_no'] = $dept_no;
+  ?>
 </div>
 </body>
 </html>

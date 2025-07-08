@@ -1,6 +1,9 @@
 <?php
+session_start();
 require('../inc/functions.php');
-$list = getListDepartment();
+$list = getListDepartment(); 
+$current_dept = getDepartment($_SESSION['dept_no']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,20 +19,19 @@ $list = getListDepartment();
         <select name="dept" class="form-control mb-2">
         <option value="">Tous départements</option>
         <?php foreach($list as $d): ?>
-            <option value="<?= $d['dept_name'] ?>"><?= $d['dept_name'] ?></option>
+            <option value="<?= $d['dept_no'] ?>"><?= $d['dept_name'] ?></option>
             <?php endforeach; ?>
         </select>
         <p>Quand souhaiter vous entrer? :  </p>
         <input type="date" >
         <input type="submit" value = "valider">
     </form>
-   
-   <?php $change = changeDepartment($_POST['dept']); ?>
 
-
-   
-
-    
+    <?php if(isset($_POST['dept']) && $_POST['dept'] != $current_dept['dept_name']){ ?>
+        <?php echo($current_dept['dept_name']) ?>
+        <?php changeDepartment($_POST['dept'],$current_dept['dept_name']); ?>
+        
+    <?php } ?>
 
 </body>
 </html>

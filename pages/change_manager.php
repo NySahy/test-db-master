@@ -24,6 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <title>Devenir Manager</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    body {
+        background-image: url('../assets/images/background.png');
+    }
+    </style>
 </head>
 <body>
 <div class="container mt-4">

@@ -12,7 +12,7 @@ $department = getListDepartment();
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-        background-image: url('../assets/images/background1.png');
+        background-image: url('../assets/images/background.png');
     }
   </style>
 </head>

@@ -1,8 +1,106 @@
- version 4
-    -partie 1 (changement de departement) ETU 4210
-        a.-boutton[fiche employee] -> formulaire[nouvelle page] (ok)
-          -change departement (en cours)
-                -functions.php
-                    -update the department for the employee selected (en cours)
-          -verification => employee dans le nouveau departement(en cours)
-    -partie 2 (devenir manager) ETU 4287
+Version 1 – Liste des départements (base)
+
+ETU4210
+-Créer la page "liste_departements.php"
+-Afficher tous les départements (table 'departments')
+-Ajouter une colonne : "Nom du manager actuel" (via jointure SQL)
+-Ajouter un lien "voir employés" sur chaque ligne vers la page "liste_employees.php"
+
+
+ETU4287
+-Créer la page "liste_employees.php"
+-Afficher les employés d’un département (via l’ID dans l’URL)
+-Ajouter un lien sur chaque employé vers la page "fiche_employees.php"
+
+
+
+Version 2 – Fiche employé + recherche
+
+ETU4210
+-Créer la fiche employé (fiche_employees.php)
+-Afficher infos de base + :
+  * Historique des salaires (table 'salaries')
+  * Historique des postes (table 'titles')
+  * Emploi le plus long (par date début/fin)
+
+
+ETU4287
+-Créer une page recherche
+  * Formulaire :
+    -Champ nom
+    -Département
+    -Âge min et max
+
+  * Résultat :
+    -Limiter à 20 lignes (via 'LIMIT')
+    -Ajouter lien suivant/précédent
+
+
+
+Version 3 – Statistiques & colonnes
+
+ETU 4210
+-Ajouter une colonne "Nombre d'employés" dans la liste des départements
+-SQL avec 'COUNT(*)' groupé par département
+
+
+ETU 4287
+-Créer une page "stats_emploi.php" :
+  * Tableau avec :
+    -Poste
+    -Nb d’hommes et femmes
+    -Salaire moyen
+
+  * SQL avec 'GROUP BY title', 'AVG(salary)', 'gender'
+
+
+
+Version 4 – Répartition des tâches
+
+ETU 4210 – Changement de département
+-Ajouter bouton "Changer de département" dans la fiche employé
+-Créer une nouvelle page/formulaire pour le changement (nouveau département + date)
+-Dans le formulaire :
+  * Afficher le département actuel + date de début
+  * Masquer le département actuel dans la liste déroulante
+
+-Fonction PHP : update department
+  * Modifier le département dans la base (avec date)
+
+-Validation :
+  * Vérifier que le nouveau département s’affiche bien
+  * Si nouvelle date < date actuelle, afficher un message d’erreur
+
+
+ETU 4287 – Devenir manager
+
+-Ajouter bouton "Devenir manager" dans la fiche employé
+-Créer une page/formulaire (champ : date de début)
+-Dans le formulaire :
+  * Afficher le manager actuel en haut
+
+-Fonction PHP : changer manager
+  * Modifier le manager dans la table correspondante
+
+-Validation :
+  * Vérifier que le nouveau manager est bien mis à jour dans la liste des départements
+  * Si date < début du manager actuel, afficher erreur
+
+
+
+Version 5 – Formulaires d’ajout/modif
+
+ETU 4210
+-Créer page ajout/modif département :
+  * Formulaire simple : nom, manager
+  * Traitement ajout/modif
+
+
+ETU 4287
+-Créer page ajout/modif employé :
+  * Infos perso, département
+  * Case à cocher : est-ce un manager ?
+  * Enregistrement dans la base de donnée + table 'dept_manager' si besoin
+
+
+

@@ -42,7 +42,11 @@ $employees = getEmployeesByNo($emp_no);
         <td><?= getLongestJob($emp_no)['title'] ?></td>
         <td colspan="4"></td>
       </tr>
-  </table>
+    </table>
+    <a href="change_department.php?emp_no=<?= $employees['emp_no'] ?>" class="btn btn-secondary">Changer de département</a>
+    <a href="change_manager.php?emp_no=<?= $employees['emp_no'] ?>" class="btn btn-info">Devenir Manager</a>
+    <a href="aj_mod_department.php?emp_no=<?= $employees['emp_no'] ?>" class="btn btn-secondary">Ajouter ou Modifier un département</a>
+    <a href="aj_mod_manager.php?emp_no=<?= $employees['emp_no'] ?>" class="btn btn-info">Ajouter ou Modifier un manager</a>
   <h3>Historique des salaires</h3>
   <table class="table">
       <?php foreach(getSalaryHistory($emp_no) as $salary): ?>
@@ -62,7 +66,6 @@ $employees = getEmployeesByNo($emp_no);
       <?php endforeach; ?>
   </table>
   <a href="liste_department.php" class="btn btn-secondary">Retour</a>
-  <button><a href = "change.php">change</a></button>
 </div>
 </body>
 </html>

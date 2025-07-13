@@ -124,10 +124,52 @@ function getLongestJob($emp_no) {
     return mysqli_fetch_assoc($query);
 }
 
-function changeDepartment($select_dept,$current_dept_emp){
-    $update = " UPDATE dept_emp SET dept_no = '$select_dept' WHERE emp_no = '$current_dept_emp'";
-    $query = mysqli_query(dbconnect(),$update);
-    return $query;
+function getCurrentDepartment($emp_no) {
+    $sql = "SELECT departments.dept_no, departments.dept_name, dept_emp.from_date 
+            FROM dept_emp
+            JOIN departments ON dept_emp.dept_no = departments.dept_no
+            WHERE dept_emp.emp_no = '$emp_no'
+            ORDER BY dept_emp.to_date DESC LIMIT 1";
+    $result = mysqli_query(dbconnect(), $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function changeDepartment($emp_no, $new_dept, $start_date) {
+    $update_old = "UPDATE dept_emp SET to_date = DATE_SUB('$start_date', INTERVAL 1 DAY) 
+                   WHERE emp_no = '$emp_no' AND to_date = '9999-01-01'";
+    mysqli_query(dbconnect(), $update_old);
+    
+    $insert_new = "INSERT INTO dept_emp (emp_no, dept_no, from_date, to_date)
+                   VALUES ('$emp_no', '$new_dept', '$start_date', '9999-01-01')";
+    return mysqli_query(dbconnect(), $insert_new);
+}
+
+function getCurrentManager($dept_no) {
+    $sql = "SELECT employees.first_name, employees.last_name, dept_manager.from_date 
+            FROM dept_manager
+            JOIN employees ON dept_manager.emp_no = employees.emp_no
+            WHERE dept_manager.dept_no = '$dept_no'
+            AND dept_manager.to_date = '9999-01-01'";
+    $result = mysqli_query(dbconnect(), $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function changeManager($emp_no, $dept_no, $start_date) {
+    $update = "UPDATE dept_manager 
+               SET to_date = DATE_SUB('$start_date', INTERVAL 1 DAY)
+               WHERE dept_no = '$dept_no' AND to_date = '9999-01-01'";
+    mysqli_query(dbconnect(), $update);
+    
+    $insert = "INSERT INTO dept_manager (emp_no, dept_no, from_date, to_date)
+               VALUES ('$emp_no', '$dept_no', '$start_date', '9999-01-01')";
+    return mysqli_query(dbconnect(), $insert);
+}
+
+function isManager($emp_no) {
+    $sql = "SELECT 1 FROM dept_manager 
+            WHERE emp_no = '$emp_no' AND to_date = '9999-01-01'";
+    $result = mysqli_query(dbconnect(), $sql);
+    return mysqli_num_rows($result) > 0;
 }
 ?>
 

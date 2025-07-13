@@ -19,6 +19,9 @@ $department = getListDepartment();
 <body>
 <div class="container mt-4">
   <h2>Liste des départements</h2>
+  <a href="stats_emploi.php" style="text-decoration:none">Cliquez ici pour voir les statistiques de chaque emploi</a>
+  <br>
+  <br>
   <table class="table table-striped">
     <tr>
       <th>Nom</th>
@@ -29,7 +32,7 @@ $department = getListDepartment();
       $manager = getManagerEnCours($dep['dept_no']);
     ?>
       <tr>
-        <td><a href="liste_employees.php?dept_no=<?= $dep['dept_no'] ?>" style = "text-decoration: none"><?= $dep['dept_name'] ?></a></td>
+        <td><a href="liste_employees.php?dept_no=<?= $dep['dept_no'] ?>" style="text-decoration:none"><?= $dep['dept_name'] ?></a></td>
         <td><?= $manager['first_name'] ?> <?= $manager['last_name'] ?></td>
         <td><?= getEmployeeCountByDept($dep['dept_no']) ?></td>
       </tr>
